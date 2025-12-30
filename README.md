@@ -1,58 +1,124 @@
-🏥 Health Insurance Premium Prediction AI
-Project Overview
-This project is an end-to-end Machine Learning application designed to predict health insurance premiums based on individual health and demographic profiles. By leveraging advanced regression techniques, the model provides instant, data-driven cost estimates through a modern, user-friendly web interface.
+# Health Insurance Premium Prediction
 
-🚀 Key Features
-🧠 Error-Driven Model Architecture (Intelligent Routing)
-During initial evaluation, a significant residual error was identified in the 18–25 age demographic. To solve this, I performed an Error Analysis and implemented a two-fold strategy:
+## Overview
 
-Data Stratification: Split the dataset into two specialized subsets (Young vs. Senior) to capture distinct risk patterns.
+This project predicts health insurance premiums using Machine Learning based on demographic, lifestyle, and medical attributes. The focus of the project is improving model accuracy through error analysis, data segmentation, and feature engineering.
 
-Feature Engineering: Introduced a 'Genetic Risk' feature to provide the model with deeper context, successfully decreasing the error rate and boosting overall accuracy.
+---
 
-Dynamic Routing: The application logic automatically routes user data to the specific model optimized for their age bracket.
+## Problem Statement
 
-💻 Technical Highlights
-High-Performance Regressors: Built using XGBoost, a powerful gradient boosting library known for its efficiency and predictive power.
+A single regression model showed inconsistent performance across age groups. Higher prediction errors were observed for individuals aged 25 and below, indicating different premium behavior compared to older individuals.
 
-Modern UI/UX: A clean, dashboard-style interface developed with Streamlit, featuring custom CSS for a professional "Health-Tech" look and feel.
+---
 
-Data Pipeline: Includes robust preprocessing steps like feature scaling and categorical encoding to handle real-world medical data.
+## Approach
 
-🛠️ Technology Stack
-Language: Python
+### Exploratory Data Analysis (EDA)
 
-Modeling: XGBoost, Scikit-Learn
+EDA was performed using Seaborn and Matplotlib to understand:
 
-Web Framework: Streamlit
+* Feature distributions
+* Age-wise premium trends
+* Correlation between variables
+* Presence of outliers
 
-Version Control: Git & GitHub
+Insights from EDA highlighted age as a major factor influencing prediction error.
 
-Deployment: Streamlit Cloud
+---
 
-📂 Project Structure
-Plaintext
+### Data Preprocessing
 
-├── artifacts/               # Trained models (.joblib) and scalers
-├── main.py                  # Streamlit frontend and application logic
-├── prediction_helper.py     # Data processing and model loading logic
-├── requirements.txt         # List of dependencies for deployment
-├── .gitignore               # Files excluded from the repository
-└── README.md                # Project documentation
-⚙️ How It Works
-Input: User enters details (Age, BMI, Smoking Status, Income, etc.) via the dashboard.
+The following preprocessing steps were applied:
 
-Processing: Data is cleaned and normalized using specialized scalers.
+* Handling missing values
+* Encoding categorical variables
+* Feature scaling
+* Train-test split
 
-Model Selection: Based on user age, the app dynamically loads the model_young or model_rest.
+---
 
-Output: The model calculates the estimated premium and displays it instantly.
+### Error Analysis
 
-🚀 Future Scope & Enhancements
-Expanded Medical Parameters: Integrate data points like Blood Pressure and Cholesterol for deeper risk profiling.
+After training a baseline regression model, residual errors were analyzed across age groups. The analysis showed significantly higher errors for the younger age group.
 
-Explainable AI (XAI): Add SHAP value integration to show users exactly why their premium is a certain price.
+---
 
-Time-Series Tracking: Predict how premiums might change over 5–10 years based on aging and lifestyle trends.
+### Data Segmentation
 
-Automated Retraining: Set up a pipeline to automatically update models as new insurance data becomes available.
+Based on error analysis, the dataset was split into:
+
+* Age ≤ 25
+* Age > 25
+
+Separate models were trained for each group.
+
+---
+
+### Feature Engineering
+
+A Genetic Risk feature was introduced to capture hereditary health impact and improve model learning.
+
+---
+
+## Model Details
+
+* Problem Type: Regression
+* Algorithm: XGBoost Regressor
+* Separate models trained for each age group
+
+---
+
+## Prediction Logic
+
+1. Preprocess input data
+2. Check user age
+3. Select the appropriate model
+4. Predict insurance premium
+
+---
+
+## Tools & Libraries
+
+* Python
+* Pandas, NumPy
+* Seaborn, Matplotlib
+* Scikit-learn
+* XGBoost
+---
+
+## Project Structure
+
+```
+artifacts/
+main.py
+prediction_helper.py
+requirements.txt
+README.md
+```
+
+---
+
+## Key Learnings
+
+* Error analysis can guide better model design
+* Data segmentation improves prediction accuracy
+* Feature engineering adds significant value
+* XGBoost performs well for non-linear regression problems
+
+---
+
+## Future Work
+
+* Add more medical parameters
+* Integrate model explainability
+* Extend to long-term premium forecasting
+
+---
+
+## Conclusion
+
+This project demonstrates a structured Machine Learning workflow with a focus on improving model performance using data-driven insights.
+
+
+
